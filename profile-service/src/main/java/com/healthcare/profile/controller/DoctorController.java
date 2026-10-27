@@ -28,106 +28,104 @@ import jakarta.validation.Valid;
 @RequestMapping("/v1/profiles/doctors")
 public class DoctorController {
 
-    private final DoctorService doctorService;
+        private final DoctorService doctorService;
 
-    public DoctorController(DoctorService doctorService) {
-        this.doctorService = doctorService;
-    }
+        public DoctorController(DoctorService doctorService) {
+                this.doctorService = doctorService;
+        }
 
-    @PostMapping
-    public ResponseEntity<DoctorResponse> createDoctor(
-            @Valid @RequestBody DoctorRequest request) {
+        @PostMapping
+        public ResponseEntity<DoctorResponse> createDoctor(
+                        @Valid @RequestBody DoctorRequest request) {
 
-        DoctorResponse response =
-                doctorService.createDoctor(request);
+                DoctorResponse response = doctorService.createDoctor(request);
 
-        return new ResponseEntity<>(
-                response,
-                HttpStatus.CREATED);
-    }
+                return new ResponseEntity<>(
+                                response,
+                                HttpStatus.CREATED);
+        }
 
-    @GetMapping
-    public ResponseEntity<Page<DoctorResponse>> getAllDoctors(
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size,
-            @RequestParam(defaultValue = "id") String sortBy,
-            @RequestParam(defaultValue = "asc") String direction) {
+        // added a comment
+        @GetMapping
+        public ResponseEntity<Page<DoctorResponse>> getAllDoctors(
+                        @RequestParam(defaultValue = "0") int page,
+                        @RequestParam(defaultValue = "10") int size,
+                        @RequestParam(defaultValue = "id") String sortBy,
+                        @RequestParam(defaultValue = "asc") String direction) {
 
-        Page<DoctorResponse> response =
-                doctorService.getAllDoctors(
-                        page,
-                        size,
-                        sortBy,
-                        direction);
+                Page<DoctorResponse> response = doctorService.getAllDoctors(
+                                page,
+                                size,
+                                sortBy,
+                                direction);
 
-        return ResponseEntity.ok(response);
-    }
+                return ResponseEntity.ok(response);
+        }
 
-    @GetMapping("/search")
-    public ResponseEntity<List<DoctorResponse>> searchDoctors(
-            @RequestParam(required = false) String firstName,
-            @RequestParam(required = false) String lastName,
-            @RequestParam(required = false) String specialization,
-            @RequestParam(required = false) String qualification,
-            @RequestParam(required = false) String licenseNumber,
-            @RequestParam(required = false) String phoneNumber,
-            @RequestParam(required = false) String email) {
+        @GetMapping("/search")
+        public ResponseEntity<List<DoctorResponse>> searchDoctors(
+                        @RequestParam(required = false) String firstName,
+                        @RequestParam(required = false) String lastName,
+                        @RequestParam(required = false) String specialization,
+                        @RequestParam(required = false) String qualification,
+                        @RequestParam(required = false) String licenseNumber,
+                        @RequestParam(required = false) String phoneNumber,
+                        @RequestParam(required = false) String email) {
 
-        List<DoctorResponse> doctors =
-                doctorService.searchDoctors(
-                        firstName,
-                        lastName,
-                        specialization,
-                        qualification,
-                        licenseNumber,
-                        phoneNumber,
-                        email);
+                List<DoctorResponse> doctors = doctorService.searchDoctors(
+                                firstName,
+                                lastName,
+                                specialization,
+                                qualification,
+                                licenseNumber,
+                                phoneNumber,
+                                email);
 
-        return ResponseEntity.ok(doctors);
-    }
+                return ResponseEntity.ok(doctors);
+        }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<DoctorResponse> getDoctorById(
-            @PathVariable Long id) {
+        @GetMapping("/{id}")
+        public ResponseEntity<DoctorResponse> getDoctorById(
+                        @PathVariable Long id) {
 
-        return ResponseEntity.ok(
-                doctorService.getDoctorById(id));
-    }
+                return ResponseEntity.ok(
+                                doctorService.getDoctorById(id));
+        }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<DoctorResponse> updateDoctor(
-            @PathVariable Long id,
-            @Valid @RequestBody DoctorRequest request) {
+        @PutMapping("/{id}")
+        public ResponseEntity<DoctorResponse> updateDoctor(
+                        @PathVariable Long id,
+                        @Valid @RequestBody DoctorRequest request) {
 
-        return ResponseEntity.ok(
-                doctorService.updateDoctor(id, request));
-    }
+                return ResponseEntity.ok(
+                                doctorService.updateDoctor(id, request));
+        }
 
-    @PatchMapping("/{id}")
-    public ResponseEntity<DoctorResponse> updateDoctorPartially(
-            @PathVariable Long id,
-            @Valid @RequestBody DoctorPatchRequest request) {
+        @PatchMapping("/{id}")
+        public ResponseEntity<DoctorResponse> updateDoctorPartially(
+                        @PathVariable Long id,
+                        @Valid @RequestBody DoctorPatchRequest request) {
 
-        return ResponseEntity.ok(
-                doctorService.updateDoctorPartially(
-                        id, request));
-    }
+                return ResponseEntity.ok(
+                                doctorService.updateDoctorPartially(
+                                                id, request));
+        }
 
-    @PatchMapping("/{id}/status")
-    public ResponseEntity<DoctorResponse> updateDoctorStatus(
-            @PathVariable Long id,
-            @Valid @RequestBody DoctorStatusUpdateRequest request) {
+        @PatchMapping("/{id}/status")
+        public ResponseEntity<DoctorResponse> updateDoctorStatus(
+                        @PathVariable Long id,
+                        @Valid @RequestBody DoctorStatusUpdateRequest request) {
 
-        return ResponseEntity.ok(
-                doctorService.updateDoctorStatus(
-                        id, request));
-    }
+                return ResponseEntity.ok(
+                                doctorService.updateDoctorStatus(
+                                                id, request));
+        }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteDoctor(
-            @PathVariable Long id) {
+        @DeleteMapping("/{id}")
+        public ResponseEntity<String> deleteDoctor(
+                        @PathVariable Long id) {
 
-        return ResponseEntity.ok(
-                doctorService.deleteDoctor(id));
-    }
+                return ResponseEntity.ok(
+                                doctorService.deleteDoctor(id));
+        }
 }
