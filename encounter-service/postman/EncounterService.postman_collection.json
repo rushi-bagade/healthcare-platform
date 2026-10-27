@@ -1,0 +1,157 @@
+{
+  "info": {
+    "name": "Healthcare - Encounter Service",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8083"
+    },
+    {
+      "key": "appointmentId",
+      "value": "2"
+    },
+    {
+      "key": "patientId",
+      "value": "3"
+    },
+    {
+      "key": "doctorId",
+      "value": "5"
+    },
+    {
+      "key": "encounterId",
+      "value": "1"
+    }
+  ],
+  "item": [
+    {
+      "name": "Create Encounter",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"appointmentId\": {{appointmentId}},\n  \"chiefComplaint\": \"Persistent headache for three days\",\n  \"diagnosis\": \"Migraine\",\n  \"clinicalNotes\": \"Patient reports intermittent headache with sensitivity to light.\",\n  \"treatmentNotes\": \"Advised hydration, rest and prescribed medication as per doctor assessment.\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/v1/encounters",
+          "host": ["{{baseUrl}}"],
+          "path": ["v1", "encounters"]
+        }
+      }
+    },
+    {
+      "name": "Get Encounter By ID",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/v1/encounters/{{encounterId}}",
+          "host": ["{{baseUrl}}"],
+          "path": ["v1", "encounters", "{{encounterId}}"]
+        }
+      }
+    },
+    {
+      "name": "Get All Encounters - Pagination + Sorting",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/v1/encounters?page=0&size=10&sortBy=encounterDate&direction=desc",
+          "host": ["{{baseUrl}}"],
+          "path": ["v1", "encounters"],
+          "query": [
+            { "key": "page", "value": "0" },
+            { "key": "size", "value": "10" },
+            { "key": "sortBy", "value": "encounterDate" },
+            { "key": "direction", "value": "desc" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get Encounters By Patient",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/v1/encounters/patients/{{patientId}}?page=0&size=10&sortBy=encounterDate&direction=desc",
+          "host": ["{{baseUrl}}"],
+          "path": ["v1", "encounters", "patients", "{{patientId}}"],
+          "query": [
+            { "key": "page", "value": "0" },
+            { "key": "size", "value": "10" },
+            { "key": "sortBy", "value": "encounterDate" },
+            { "key": "direction", "value": "desc" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get Encounters By Doctor",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/v1/encounters/doctors/{{doctorId}}?page=0&size=10&sortBy=encounterDate&direction=desc",
+          "host": ["{{baseUrl}}"],
+          "path": ["v1", "encounters", "doctors", "{{doctorId}}"],
+          "query": [
+            { "key": "page", "value": "0" },
+            { "key": "size", "value": "10" },
+            { "key": "sortBy", "value": "encounterDate" },
+            { "key": "direction", "value": "desc" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get Encounter By Appointment",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/v1/encounters/appointments/{{appointmentId}}",
+          "host": ["{{baseUrl}}"],
+          "path": ["v1", "encounters", "appointments", "{{appointmentId}}"]
+        }
+      }
+    },
+    {
+      "name": "Update Encounter",
+      "request": {
+        "method": "PUT",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"chiefComplaint\": \"Persistent headache and nausea\",\n  \"diagnosis\": \"Migraine\",\n  \"clinicalNotes\": \"Symptoms improved after treatment.\",\n  \"treatmentNotes\": \"Continue current treatment and follow-up as advised.\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/v1/encounters/{{encounterId}}",
+          "host": ["{{baseUrl}}"],
+          "path": ["v1", "encounters", "{{encounterId}}"]
+        }
+      }
+    },
+    {
+      "name": "Complete Encounter",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"status\": \"COMPLETED\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/v1/encounters/{{encounterId}}/status",
+          "host": ["{{baseUrl}}"],
+          "path": ["v1", "encounters", "{{encounterId}}", "status"]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+HELP.md
+mvnw
+mvnw.cmd
+.mvn/
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!.mvn/wrapper/maven-wrapper.properties
+.idea/
+*.iml
+.vscode/
+*.log
+.env

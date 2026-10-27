@@ -1,0 +1,13 @@
+package com.healthcare.fhir.dto;
+
+public record PractitionerFhirRequest(
+        Long doctorId,
+        String firstName,
+        String lastName,
+        String gender,
+        String phoneNumber,
+        String email,
+        String specialization
+
+) {
+}
